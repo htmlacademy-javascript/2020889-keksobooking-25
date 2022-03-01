@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
-* Студент: [Kamilla Artikova](https://up.htmlacademy.ru/javascript/25/user/2020889).
-* Наставник: `Неизвестно`.
+- Студент: [Kamilla Artikova](https://up.htmlacademy.ru/javascript/25/user/2020889).
+- Наставник: `Артем Рудов`.
 
 ---
 
