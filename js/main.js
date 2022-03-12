@@ -51,12 +51,19 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-
 //Функция, возвращающая случайное целое.
 function getRandomNumber(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+function getRandomNumber2(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  const numberWithZero = Math.floor(Math.random() * (max - min + 1)) + min; 
+  if (numberWithZero > 9) { return numberWithZero} 
+  else { return '0' + numberWithZero }
 };
 
 
@@ -68,35 +75,50 @@ function getRandomLatLng(min, max, maxDigits) {
   return ((Math.random() * (max - min) + min) * digitsDegree) / digitsDegree;
 };
 
+const getRandomArrayFeauters = (features) => {
+  const lastIndex = features.length - 1;
+  const a = getRandomNumber(0, lastIndex);
+  const b = getRandomNumber(0, lastIndex);
+  const lower = Math.min(a, b);
+  const upper = Math.max(a, b);
+
+  return features.slice(lower, upper);
+};
+
+const locationLat = getRandomLatLng(35.65000, 35.70000, 5);
+const locationLng = getRandomLatLng(139.70000, 139.80000, 5);
+
 const getRandomArrayElement = (elements) => {
   return elements[getRandomNumber(0, elements.length - 1)];
 };
 
+
 const createPost = () => {
   return {
     author: {
-    avatar: 'img/avatars/user' + getRandomNumber(0,10) + '.png',
+      avatar: 'img/avatars/user' + getRandomNumber2(1, 10) + '.png',
     },
 
     offer: {
-    title: getRandomArrayElement(TITLE),
-    address: getRandomArrayElement(address),
-    price: getRandomNumber(40000,200000),
-    type: getRandomArrayElement(TYPE),
-    rooms: getRandomArrayElement(rooms),
-    guests: getRandomNumber(1,10),
-    checkin: getRandomArrayElement(CHECKIN),
-    checkout: getRandomArrayElement(CHECKOUT),
-    features: getRandomArrayElement(FEAUTURES),
-    description: getRandomArrayElement(DESCRIPTION),
-    photos: getRandomArrayElement(PHOTOS),
+      title: getRandomArrayElement(TITLE),
+      address: `${locationLat}, ${locationLng}`,
+      price: getRandomNumber(40000, 200000),
+      type: getRandomArrayElement(TYPE),
+      rooms: getRandomNumber(1,5),
+      guests: getRandomNumber(1, 10),
+      checkin: getRandomArrayElement(CHECKIN),
+      checkout: getRandomArrayElement(CHECKOUT),
+      features: getRandomArrayFeauters(FEAUTURES),
+      description: getRandomArrayElement(DESCRIPTION),
+      photos: getRandomArrayElement(PHOTOS),
     },
 
     location: {
-    lat: getRandomLatLng(35.65000, 35.70000, 5),
-    lng: getRandomLatLng(139.70000, 139.80000, 5),
+      lat: locationLat,
+      lng: locationLng,
     },
   };
 };
 
-console.log(createPost);
+const result = createPost()
+console.log(result);
