@@ -59,7 +59,7 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getRandomNumber2(min, max) {
+function getRandomPictureNumber(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   const numberWithZero = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -89,24 +89,37 @@ const getRandomArrayFeauters = (features) => {
   return features.slice(min, max);
 };
 
-const locationLat = getRandomLatLng(35.65000, 35.70000, 5);
-const locationLng = getRandomLatLng(139.70000, 139.80000, 5);
+const minLatitude = 35.65000;
+const maxLatitude = 35.70000;
+const latitudeDigits = 5;
+const minLongtitude = 139.70000;
+const maxLongtitude = 139.80000;
+const longtitudeDigits = 5;
+const locationLat = getRandomLatLng(minLatitude, maxLatitude, latitudeDigits);
+const locationLng = getRandomLatLng(minLongtitude, maxLongtitude, longtitudeDigits);
 
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
-
+const minPictureNumber = 1;
+const maxPictureNumber = 10;
+const minPrice = 40000;
+const maxPrice = 200000;
+const minNumberOfRooms = 1;
+const maxNumberOfRooms = 5;
+const minNumberOfGuests = 1;
+const maxNumberOfGuests = 10;
 
 const createPost = () => ({
   author: {
-    avatar: `img/avatars/user${  getRandomNumber2(1, 10)  }.png`,
+    avatar: `img/avatars/user${getRandomPictureNumber(minPictureNumber, maxPictureNumber)}.png`,
   },
 
   offer: {
     title: getRandomArrayElement(TITLE),
     address: `${locationLat}, ${locationLng}`,
-    price: getRandomNumber(40000, 200000),
+    price: getRandomNumber(minPrice, maxPrice),
     type: getRandomArrayElement(TYPE),
-    rooms: getRandomNumber(1,5),
-    guests: getRandomNumber(1, 10),
+    rooms: getRandomNumber(minNumberOfRooms, maxNumberOfRooms),
+    guests: getRandomNumber(minNumberOfGuests, maxNumberOfGuests),
     checkin: getRandomArrayElement(CHECKIN),
     checkout: getRandomArrayElement(CHECKOUT),
     features: getRandomArrayFeauters(FEAUTURES),
@@ -122,7 +135,3 @@ const createPost = () => ({
 
 const result = createPost();
 console.log(result);
-
-//const orders = ['title', 'address', 'price', 'type', 'rooms', 'guests', 'checkin', 'checkout', 'features', 'description','photos']
-//orders.forEach((order) => {
-//console.log(order, result.offer[order]);
