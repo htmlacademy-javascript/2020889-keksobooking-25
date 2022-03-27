@@ -1,5 +1,4 @@
 import './util.js';
-import {createPost} from './data.js';
-
-const result = createPost();
+import {offerFragment} from './generating-similar-elements';
+const result = offerFragment();
 console.log(result);
