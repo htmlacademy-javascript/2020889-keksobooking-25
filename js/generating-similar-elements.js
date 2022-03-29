@@ -1,48 +1,62 @@
 import {createPost} from './data.js';
+import {TYPE} from './data.js';
 
-const similarOfferTemplate = document.querySelector('#card').content.querySelector('.popup');
-const offerFragment = document.createDocumentFragment();
-const mapContainer = document.querySelector('#map-canvas');
+const offerTemplate = document.querySelector('#card').content.querySelector('.popup');
+const similarCards = createPost(1);
+const similarCardsFragment = document.createDocumentFragment();
+const mapCanvas = document.querySelector('#map-canvas');
 
-const getSimilarOffers= (offer) => {
-  const offerElement = similarOfferTemplate.cloneNode(true);
-  offerElement.querySelector('.popup__title').textContent = offer.title;
-  offerElement.querySelector('.popup__text--address').textContent = offer.address;
-  offerElement.querySelector('.popup__text--price').innerHtml = `${offer.price} <span>₽/ночь</span>`;
-  offerElement.querySelector('.popup__type').innerHtml = offer.type;
-  offerElement.querySelector('.popup__text--capacity').innerHtml = `${offer.rooms} комнаты для ${offer.guests}`;
-  offerElement.querySelector('.popup__text--time').innerHtml = `${offer.checkin}, выезд до ${offer.checkout}`;
+similarCards.forEach((card) => {
+  const offerElement = offerTemplate.cloneNode(true);
+  offerElement.querySelector('.popup__avatar').src = card.author.avatar;
+  offerElement.querySelector('.popup__title').textContent = card.offer.title;
+  offerElement.querySelector('.popup__text--address').textContent = card.offer.address;
+  offerElement.querySelector('.popup__text--price').textContent = `${card.offer.price} ₽/ночь`;
+  offerElement.querySelector('.popup__type').textContent =TYPE[card.offer.type];
+  offerElement.querySelector('.popup__text--capacity').textContent = `${card.offer.rooms} комнаты для ${card.offer.guests} гостей`;
+  offerElement.querySelector('.popup__text--time').textContent = `Заезд после ${card.offer.checkin}, выезд до ${card.offer.checkout}`;
 
-  const features = offer.features;
-  const featuresList = offerElement.querySelectorAll('.popup__feature');
+  const offerDescription = offerElement.querySelector('.popup__description');
+  offerDescription.textContent = card.offer.description;
 
-  featuresList.forEach((featuresListItem) => {
-    const isNecessary = features.some((feature) =>
-      featuresListItem.classList.contains(`popup__feature--${feature}`));
+  if (!offerDescription.textContent) {
+    offerDescription.classList.add('visually-hidden');
+  }
 
-    if (!isNecessary) {featuresListItem.remove();
-    }
-  });
+  const featuresContainer = offerElement.querySelector('.popup__features ');
+  const featuresList = featuresContainer.querySelectorAll('.popup__feature');
+  const userFeaturesList = card.offer.features;
 
-  offerElement.querySelector('.popup__description').textContent = offer.description;
+  if (userFeaturesList.length === 0) {
+    featuresContainer.classList.add('visually-hidden');
+  } else {
+    featuresList.forEach((featuresListItem) => {
+      const isNecessary = userFeaturesList.some(
+        (feature) => featuresListItem.classList.contains(`popup__feature--${feature}`),
+      );
 
-  const photos = offerElement.querySelector('.popup__photos');
-  const photoElement = photos.querySelector('.popup__photo');
-  const photoSources = offer.photos;
+      if (!isNecessary) {
+        featuresListItem.remove();
+      }
+    });
+  }
 
-  photoSources.forEach((image) => {
-    const newPhotoElement = photoElement.cloneNode(true);
-    newPhotoElement.src = image;
-    photos.append(newPhotoElement);
-  });
+  const userPhotoList = card.offer.photos;
+  const photosContainer = offerElement.querySelector('.popup__photos');
+  const photoTemplate = photosContainer.querySelector('.popup__photo');
+  photosContainer.innerHTML = '';
 
-  offerElement.querySelector('.popup__avatar').src = offer.avatar;
-  return offerElement;
-};
+  if (userPhotoList.length === 0) {
+    photosContainer.classList.add('visually-hidden');
+  } else {
+    userPhotoList.forEach((photo) => {
+      const userPhoto = photoTemplate.cloneNode(true);
+      userPhoto.src = photo;
+      photosContainer.appendChild(userPhoto);
+    });
+  }
 
-createPost.forEach((element) => {
-  offerFragment.appendChild(getSimilarOffers(element));
+  similarCardsFragment.appendChild(offerElement);
 });
 
-mapContainer.appendChild(getSimilarOffers(createPost[0]));
-export {offerFragment};
+mapCanvas.appendChild(similarCardsFragment.children[0]);

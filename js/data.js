@@ -10,13 +10,13 @@ const TITLE = [
   'Угловой апартамент в Башне Нева',
 ];
 
-const TYPE = [
-  'palace',
-  'flat',
-  'house',
-  'bungalow',
-  'hotel',
-];
+const TYPE = {
+  'palace': 'Дворец',
+  'flat': 'Квартира',
+  'house': 'Дом',
+  'bungalow': 'Бунгало',
+  'hotel': 'Отель',
+};
 
 const CHECKIN = [
   '12:00',
@@ -96,3 +96,4 @@ const createPost = () => ({
 });
 
 export {createPost};
+export {TYPE};
