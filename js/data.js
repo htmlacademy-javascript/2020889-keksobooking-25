@@ -10,13 +10,13 @@ const TITLE = [
   'Угловой апартамент в Башне Нева',
 ];
 
-const TYPE = {
-  'palace': 'Дворец',
-  'flat': 'Квартира',
-  'house': 'Дом',
-  'bungalow': 'Бунгало',
-  'hotel': 'Отель',
-};
+const TYPE = [
+  {value:'palace', text: 'Дворец'},
+  {value:'flat', text:  'Квартира'},
+  {value:'house', text:  'Дом'},
+  {value:'bungalow', text: 'Бунгало'},
+  {value:'hotel', text: 'Отель'},
+];
 
 const CHECKIN = [
   '12:00',
@@ -95,5 +95,14 @@ const createPost = () => ({
   },
 });
 
-export {createPost};
+const createPosts = (numberOfPosts) => {
+  const posts = [];
+  for(let i = 0; i < numberOfPosts; i++) {
+    posts.push(createPost());
+  }
+  return posts;
+};
+
+export {createPosts};
 export {TYPE};
+export {FEAUTURES};
