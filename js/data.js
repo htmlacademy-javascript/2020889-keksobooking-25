@@ -1,4 +1,4 @@
-import {getRandomNumber, getRandomPictureNumber, getRandomLatLng, getRandomArrayFeauters, getRandomArrayElement} from './util.js';
+import {getRandomNumber, getRandomPictureNumber, getRandomLatLng, getRandomArray, getRandomArrayElement} from './util.js';
 
 const TITLE = [
   'Загородный дом с бассейном и бильярдом',
@@ -84,9 +84,9 @@ const createPost = () => ({
     guests: getRandomNumber(minNumberOfGuests, maxNumberOfGuests),
     checkin: getRandomArrayElement(CHECKIN),
     checkout: getRandomArrayElement(CHECKOUT),
-    features: getRandomArrayFeauters(FEAUTURES),
+    features: getRandomArray(FEAUTURES),
     description: getRandomArrayElement(DESCRIPTION),
-    photos: getRandomArrayElement(PHOTOS),
+    photos: getRandomArray(PHOTOS),
   },
 
   location: {
@@ -105,4 +105,3 @@ const createPosts = (numberOfPosts) => {
 
 export {createPosts};
 export {TYPE};
-export {FEAUTURES};
