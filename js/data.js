@@ -1,4 +1,4 @@
-import {getRandomNumber, getRandomPictureNumber, getRandomLatLng, getRandomArrayFeauters, getRandomArrayElement} from './util.js';
+import {getRandomNumber, getRandomPictureNumber, getRandomLatLng, getRandomArray, getRandomArrayElement} from './util.js';
 
 const TITLE = [
   'Загородный дом с бассейном и бильярдом',
@@ -11,11 +11,11 @@ const TITLE = [
 ];
 
 const TYPE = [
-  'palace',
-  'flat',
-  'house',
-  'bungalow',
-  'hotel',
+  {value:'palace', text: 'Дворец'},
+  {value:'flat', text:  'Квартира'},
+  {value:'house', text:  'Дом'},
+  {value:'bungalow', text: 'Бунгало'},
+  {value:'hotel', text: 'Отель'},
 ];
 
 const CHECKIN = [
@@ -84,9 +84,9 @@ const createPost = () => ({
     guests: getRandomNumber(minNumberOfGuests, maxNumberOfGuests),
     checkin: getRandomArrayElement(CHECKIN),
     checkout: getRandomArrayElement(CHECKOUT),
-    features: getRandomArrayFeauters(FEAUTURES),
+    features: getRandomArray(FEAUTURES),
     description: getRandomArrayElement(DESCRIPTION),
-    photos: getRandomArrayElement(PHOTOS),
+    photos: getRandomArray(PHOTOS),
   },
 
   location: {
@@ -95,4 +95,13 @@ const createPost = () => ({
   },
 });
 
-export {createPost};
+const createPosts = (numberOfPosts) => {
+  const posts = [];
+  for(let i = 0; i < numberOfPosts; i++) {
+    posts.push(createPost());
+  }
+  return posts;
+};
+
+export {createPosts};
+export {TYPE};

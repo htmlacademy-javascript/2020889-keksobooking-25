@@ -24,14 +24,14 @@ function getRandomLatLng(min, max, maxDigits) {
   return ((Math.random() * (max - min) + min) * digitsDegree) / digitsDegree;
 }
 
-const getRandomArrayFeauters = (features) => {
-  const lastIndex = features.length - 1;
+const getRandomArray = (data) => {
+  const lastIndex = data.length - 1;
   const a = getRandomNumber(0, lastIndex);
   const b = getRandomNumber(0, lastIndex);
   const min = Math.min(a, b);
   const max = Math.max(a, b);
-  return features.slice(min, max);
+  return data.slice(min, max);
 };
 
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
-export {getRandomNumber, getRandomPictureNumber, getRandomLatLng, getRandomArrayFeauters, getRandomArrayElement};
+export {getRandomNumber, getRandomPictureNumber, getRandomLatLng, getRandomArray, getRandomArrayElement};
