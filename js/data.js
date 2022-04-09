@@ -1,6 +1,6 @@
 import {getRandomNumber, getRandomPictureNumber, getRandomLatLng, getRandomArray, getRandomArrayElement} from './util.js';
 
-const TITLE = [
+const TITLES = [
   'Загородный дом с бассейном и бильярдом',
   'Гостевой дом 50м кв с сауной',
   'Уютный двухэтажный дом на 10 Фонтана',
@@ -10,7 +10,7 @@ const TITLE = [
   'Угловой апартамент в Башне Нева',
 ];
 
-const TYPE = [
+const TYPES = [
   {value:'palace', text: 'Дворец'},
   {value:'flat', text:  'Квартира'},
   {value:'house', text:  'Дом'},
@@ -18,13 +18,13 @@ const TYPE = [
   {value:'hotel', text: 'Отель'},
 ];
 
-const CHECKIN = [
+const CHECKINS = [
   '12:00',
   '13:00',
   '14:00',
 ];
 
-const CHECKOUT = [
+const CHECKOUTS = [
   '12:00',
   '13:00',
   '14:00',
@@ -39,7 +39,7 @@ const FEAUTURES = [
   'conditioner',
 ];
 
-const DESCRIPTION = [
+const DESCRIPTIONS = [
   'Уютная резиденция с одной спальней общей площадью 93 кв.м на 7 этаже современного здания легендарной гостиницы Москва.',
   'Лаконичный интерьер в стиле неоклассика. Открытая планировка, кухня-гостиная. Полноразмерная кухня оборудована немецкой встроенной техникой Kueppersbusch и укомплектована полным набором посуды и кофемашиной.',
   'Предлагаются в аренду шикарные, светлые апартаменты в башне Neva Towers. Полностью укомплектован дорогой мебелью и техникой.',
@@ -76,16 +76,16 @@ const createPost = () => ({
   },
 
   offer: {
-    title: getRandomArrayElement(TITLE),
+    title: getRandomArrayElement(TITLES),
     address: `${locationLat}, ${locationLng}`,
     price: getRandomNumber(minPrice, maxPrice),
-    type: getRandomArrayElement(TYPE),
+    type: getRandomArrayElement(TYPES),
     rooms: getRandomNumber(minNumberOfRooms, maxNumberOfRooms),
     guests: getRandomNumber(minNumberOfGuests, maxNumberOfGuests),
-    checkin: getRandomArrayElement(CHECKIN),
-    checkout: getRandomArrayElement(CHECKOUT),
+    checkin: getRandomArrayElement(CHECKINS),
+    checkout: getRandomArrayElement(CHECKOUTS),
     features: getRandomArray(FEAUTURES),
-    description: getRandomArrayElement(DESCRIPTION),
+    description: getRandomArrayElement(DESCRIPTIONS),
     photos: getRandomArray(PHOTOS),
   },
 
@@ -104,4 +104,4 @@ const createPosts = (numberOfPosts) => {
 };
 
 export {createPosts};
-export {TYPE};
+export {TYPES};

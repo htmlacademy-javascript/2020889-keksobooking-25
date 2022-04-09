@@ -1,5 +1,5 @@
 import {createPosts} from './data.js';
-import {TYPE} from './data.js';
+import {TYPES} from './data.js';
 
 const offerTemplate = document.querySelector('#card').content.querySelector('.popup');
 const similarCards = createPosts(10);
@@ -44,7 +44,7 @@ const createCard = function ({offer, author}) {
   setTextContent(offerElement, '.popup__title', [offer.title]);
   setTextContent(offerElement,'.popup__text--address', [offer.address]);
   setTextContent(offerElement, '.popup__text--price', [offer.price], `${offer.price} ₽/ночь`);
-  setTextContent(offerElement,'.popup__type', [TYPE[offer.type]]);
+  setTextContent(offerElement,'.popup__type', [TYPES[offer.type]]);
   setTextContent(offerElement, '.popup__text--capacity',[offer.rooms, offer.guests], `${offer.rooms} 
   комнаты для ${offer.guests} гостей`);
   setTextContent(offerElement, '.popup__text--time', [offer.checkin, offer.checkout], `Заезд после ${offer.checkin}, 
