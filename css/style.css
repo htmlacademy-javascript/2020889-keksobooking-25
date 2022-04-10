@@ -265,6 +265,10 @@ fieldset {
   width: 100%;
 }
 
+.pristine-error {
+  color: red;
+}
+
 .ad-form--disabled {
   opacity: 0.3;
   pointer-events: none;
