@@ -1,18 +1,3 @@
-const form = document.querySelector('.ad-form');
-
-const pristine = new Pristine(form, {
-  classTo: 'ad-form__element',
-  errorTextParent: 'ad-form__element',
-});
-
-const capacityField = form.querySelector('#capacity');
-const roomNumberField = form.querySelector('#room_number');
-const typeField = form.querySelector('#type');
-const checkInField = form.querySelector('#timein');
-const checkOutField = form.querySelector('#timeout');
-const sliderElement = document.querySelector('.ad-form__slider');
-const priceField = form.querySelector('#price');
-
 const maxCapacity = {
   '1': ['1'],
   '2': ['1', '2'],
@@ -39,6 +24,21 @@ const MIN_PRICE = 0;
 const MAX_PRICE = 100000;
 const START_SLIDER = 1000;
 const INITIAL_VALUE = 1000;
+
+
+const form = document.querySelector('.ad-form');
+const capacityField = form.querySelector('#capacity');
+const roomNumberField = form.querySelector('#room_number');
+const typeField = form.querySelector('#type');
+const checkInField = form.querySelector('#timein');
+const checkOutField = form.querySelector('#timeout');
+const sliderElement = document.querySelector('.ad-form__slider');
+const priceField = form.querySelector('#price');
+
+const pristine = new Pristine(form, {
+  classTo: 'ad-form__element',
+  errorTextParent: 'ad-form__element',
+});
 
 function validateCapacityField (value) {
   return maxCapacity[roomNumberField.value].includes(value);
@@ -131,4 +131,5 @@ function syncronizeCheckInAndOut (){
   });
 }
 syncronizeCheckInAndOut();
+
 export {changeRoomNumber, validateAddtionalPrice, getAdditionalPriceError, syncronizeCheckInAndOut};
