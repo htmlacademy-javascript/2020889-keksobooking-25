@@ -61,8 +61,6 @@ resetButton.addEventListener('click', () => {
   }, 16);
 });
 
-// mainPinMarker.remove(); udalyaem marker
-
 const simplePinIcon = L.icon({
   iconUrl: './img/pin.svg',
   iconSize: [40, 40],
@@ -89,5 +87,3 @@ const getBaloons = function () {
   });
 };
 getBaloons();
-
-//markerGroup.clearLayers(); udalayem sloi
