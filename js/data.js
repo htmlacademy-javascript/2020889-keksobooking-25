@@ -1,6 +1,6 @@
 import {getRandomNumber, getRandomPictureNumber, getRandomLatLng, getRandomArray, getRandomArrayElement} from './util.js';
 
-const TITLES = [
+const titles = [
   'Загородный дом с бассейном и бильярдом',
   'Гостевой дом 50м кв с сауной',
   'Уютный двухэтажный дом на 10 Фонтана',
@@ -10,7 +10,7 @@ const TITLES = [
   'Угловой апартамент в Башне Нева',
 ];
 
-const TYPES = [
+const types = [
   {value:'palace', text: 'Дворец'},
   {value:'flat', text:  'Квартира'},
   {value:'house', text:  'Дом'},
@@ -18,19 +18,19 @@ const TYPES = [
   {value:'hotel', text: 'Отель'},
 ];
 
-const CHECKINS = [
+const checkins = [
   '12:00',
   '13:00',
   '14:00',
 ];
 
-const CHECKOUTS = [
+const checkouts = [
   '12:00',
   '13:00',
   '14:00',
 ];
 
-const FEAUTURES = [
+const features = [
   'wifi',
   'dishwasher',
   'parking',
@@ -39,7 +39,7 @@ const FEAUTURES = [
   'conditioner',
 ];
 
-const DESCRIPTIONS = [
+const descriptions = [
   'Уютная резиденция с одной спальней общей площадью 93 кв.м на 7 этаже современного здания легендарной гостиницы Москва.',
   'Лаконичный интерьер в стиле неоклассика. Открытая планировка, кухня-гостиная. Полноразмерная кухня оборудована немецкой встроенной техникой Kueppersbusch и укомплектована полным набором посуды и кофемашиной.',
   'Предлагаются в аренду шикарные, светлые апартаменты в башне Neva Towers. Полностью укомплектован дорогой мебелью и техникой.',
@@ -47,28 +47,28 @@ const DESCRIPTIONS = [
   'Вместительная гардеробная комната и дополнительные системы хранения, одна мастер-ванная, один гостевой санузел с постирочной. Панорамное остекление во всех помещениях. Вид во внутренний двор.',
 ];
 
-const PHOTOS = [
+const photos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-const minLatitude = 35.65000;
-const maxLatitude = 35.70000;
-const latitudeDigits = 5;
-const minLongtitude = 139.70000;
-const maxLongtitude = 139.80000;
-const longtitudeDigits = 5;
-const locationLat = getRandomLatLng(minLatitude, maxLatitude, latitudeDigits);
-const locationLng = getRandomLatLng(minLongtitude, maxLongtitude, longtitudeDigits);
-const minPictureNumber = 1;
-const maxPictureNumber = 10;
-const minPrice = 40000;
-const maxPrice = 200000;
-const minNumberOfRooms = 1;
-const maxNumberOfRooms = 5;
-const minNumberOfGuests = 1;
-const maxNumberOfGuests = 10;
+const MIN_LATITUDE = 35.65000;
+const MAX_LATITUDE = 35.70000;
+const LATITUDE_DIGITS = 5;
+const MIN_LONGTITUDE = 139.70000;
+const MAX_LONGTITUDE = 139.80000;
+const LONGTITUDE_DIGITS = 5;
+const locationLat = getRandomLatLng(MIN_LATITUDE, MAX_LATITUDE, LATITUDE_DIGITS);
+const locationLng = getRandomLatLng(MIN_LONGTITUDE, MAX_LONGTITUDE, LONGTITUDE_DIGITS);
+const MIN_PICTURE_NUMBER = 1;
+const MAX_PICTURE_NUMBER = 10;
+const MIN_PRICE = 40000;
+const MAX_PRICE = 200000;
+const MIN_NUMBER_OF_ROOMS = 1;
+const MAX_NUMBER_OF_ROOMS = 5;
+const MIN_NUMBER_OF_GUESTS = 1;
+const MAX_NUMBER_OF_GUESTS = 10;
 
 const createPost = () => {
   const location = {
@@ -78,21 +78,21 @@ const createPost = () => {
 
   return {
     author: {
-      avatar: `img/avatars/user${getRandomPictureNumber(minPictureNumber, maxPictureNumber)}.png`,
+      avatar: `img/avatars/user${getRandomPictureNumber(MIN_PICTURE_NUMBER, MAX_PICTURE_NUMBER)}.png`,
     },
 
     offer: {
-      title: getRandomArrayElement(TITLES),
+      title: getRandomArrayElement(titles),
       address: `${locationLat}, ${locationLng}`,
-      price: getRandomNumber(minPrice, maxPrice),
-      type: getRandomArrayElement(TYPES),
-      rooms: getRandomNumber(minNumberOfRooms, maxNumberOfRooms),
-      guests: getRandomNumber(minNumberOfGuests, maxNumberOfGuests),
-      checkin: getRandomArrayElement(CHECKINS),
-      checkout: getRandomArrayElement(CHECKOUTS),
-      features: getRandomArray(FEAUTURES),
-      description: getRandomArrayElement(DESCRIPTIONS),
-      photos: getRandomArray(PHOTOS),
+      price: getRandomNumber(MIN_PRICE, MAX_PRICE),
+      type: getRandomArrayElement(types),
+      rooms: getRandomNumber(MIN_NUMBER_OF_ROOMS, MAX_NUMBER_OF_ROOMS),
+      guests: getRandomNumber(MIN_NUMBER_OF_GUESTS, MAX_NUMBER_OF_GUESTS),
+      checkin: getRandomArrayElement(checkins),
+      checkout: getRandomArrayElement(checkouts),
+      features: getRandomArray(features),
+      description: getRandomArrayElement(descriptions),
+      photos: getRandomArray(photos),
       location,
     },
   };
@@ -100,4 +100,4 @@ const createPost = () => {
 };
 
 const createPosts = () => Array.from({length: 10}, createPost);
-export {createPosts, TYPES};
+export {createPosts, types};

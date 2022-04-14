@@ -3,6 +3,7 @@ import {similarCards, createCard} from './generating-similar-elements.js';
 
 const LAT_TOKYO = 35.68999;
 const LNG_TOKYO = 139.69201;
+
 const resetButton = document.querySelector('.ad-form__reset');
 const addressField = document.querySelector('.ad-form').querySelector('#address');
 
@@ -30,7 +31,6 @@ const mainPinIcon = L.icon({
   iconAnchor: [26, 52],
 });
 
-
 const mainPinMarker = L.marker(
   {
     lat: LAT_TOKYO,
@@ -49,23 +49,18 @@ mainPinMarker.on('moveend', (evt) => {
   addressField.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
 });
 
-//posle perezagruzki vozvrawayet ikonku na mesto
 resetButton.addEventListener('click', () => {
   mainPinMarker.setLatLng({
     lat: LAT_TOKYO,
     lng: LNG_TOKYO,
   });
 
-  //posle perezagruzki vozvrawayet razmer karti na mesto
   map.setView({
     lat: LAT_TOKYO,
     lng: LNG_TOKYO,
   }, 16);
 });
 
-// mainPinMarker.remove(); udalyaem marker
-
-//sozdayem baloon
 const simplePinIcon = L.icon({
   iconUrl: './img/pin.svg',
   iconSize: [40, 40],
@@ -92,5 +87,3 @@ const getBaloons = function () {
   });
 };
 getBaloons();
-
-//markerGroup.clearLayers(); udalayem sloi
