@@ -70,38 +70,34 @@ const maxNumberOfRooms = 5;
 const minNumberOfGuests = 1;
 const maxNumberOfGuests = 10;
 
-const createPost = () => ({
-  author: {
-    avatar: `img/avatars/user${getRandomPictureNumber(minPictureNumber, maxPictureNumber)}.png`,
-  },
-
-  offer: {
-    title: getRandomArrayElement(TITLES),
-    address: `${locationLat}, ${locationLng}`,
-    price: getRandomNumber(minPrice, maxPrice),
-    type: getRandomArrayElement(TYPES),
-    rooms: getRandomNumber(minNumberOfRooms, maxNumberOfRooms),
-    guests: getRandomNumber(minNumberOfGuests, maxNumberOfGuests),
-    checkin: getRandomArrayElement(CHECKINS),
-    checkout: getRandomArrayElement(CHECKOUTS),
-    features: getRandomArray(FEAUTURES),
-    description: getRandomArrayElement(DESCRIPTIONS),
-    photos: getRandomArray(PHOTOS),
-  },
-
-  location: {
+const createPost = () => {
+  const location = {
     lat: locationLat,
     lng: locationLng,
-  },
-});
+  };
 
-const createPosts = (numberOfPosts) => {
-  const posts = [];
-  for(let i = 0; i < numberOfPosts; i++) {
-    posts.push(createPost());
-  }
-  return posts;
+  return {
+    author: {
+      avatar: `img/avatars/user${getRandomPictureNumber(minPictureNumber, maxPictureNumber)}.png`,
+    },
+
+    offer: {
+      title: getRandomArrayElement(TITLES),
+      address: `${locationLat}, ${locationLng}`,
+      price: getRandomNumber(minPrice, maxPrice),
+      type: getRandomArrayElement(TYPES),
+      rooms: getRandomNumber(minNumberOfRooms, maxNumberOfRooms),
+      guests: getRandomNumber(minNumberOfGuests, maxNumberOfGuests),
+      checkin: getRandomArrayElement(CHECKINS),
+      checkout: getRandomArrayElement(CHECKOUTS),
+      features: getRandomArray(FEAUTURES),
+      description: getRandomArrayElement(DESCRIPTIONS),
+      photos: getRandomArray(PHOTOS),
+      location,
+    },
+  };
+
 };
 
-export {createPosts};
-export {TYPES};
+const createPosts = () => Array.from({length: 10}, createPost);
+export {createPosts, TYPES};

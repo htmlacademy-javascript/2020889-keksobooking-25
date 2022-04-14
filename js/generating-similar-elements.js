@@ -2,8 +2,7 @@ import {createPosts} from './data.js';
 import {TYPES} from './data.js';
 
 const offerTemplate = document.querySelector('#card').content.querySelector('.popup');
-const similarCards = createPosts(10);
-const mapCanvas = document.querySelector('#map-canvas');
+const similarCards = createPosts()                          ;
 
 function setTextContent(element, classname, content = [], template = '') {
   const targetElement = element.querySelector(classname);
@@ -37,10 +36,11 @@ const getPhotoElements = function (photos, offerElement) {
   photoElement.classList.add('hidden');
 };
 
-const createCard = function ({offer, author}) {
+const createCard = (offer, author) => {
   const offerElement = offerTemplate.cloneNode(true);
   const popupFeatures = offerElement.querySelector('.popup__features');
-  offerElement.querySelector('.popup__avatar').src = author.avatar;
+
+  setTextContent(offerElement, '.popup__avatar', [author.avatar]);
   setTextContent(offerElement, '.popup__title', [offer.title]);
   setTextContent(offerElement,'.popup__text--address', [offer.address]);
   setTextContent(offerElement, '.popup__text--price', [offer.price], `${offer.price} ₽/ночь`);
@@ -51,12 +51,10 @@ const createCard = function ({offer, author}) {
   выезд до ${offer.checkout}`);
   setTextContent(offerElement,'.popup__description', [offer.description]);
 
-
   getFeatureElements(offer.features, popupFeatures);
-
   getPhotoElements(offer.photos, offerElement);
 
-  mapCanvas.appendChild(offerElement);
+  return offerElement;
 };
 
-createCard(similarCards[0]);
+export {createCard, similarCards};
